@@ -1,0 +1,23 @@
+{
+  "name": "dip",
+  "version": "1.0.0",
+  "description": "",
+  "main": "HelloWorld.js",
+  "dependencies": {
+    "jest": "^29.6.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mads-SJ/dip.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mads-SJ/dip/issues"
+  },
+  "homepage": "https://github.com/Mads-SJ/dip#readme"
+}

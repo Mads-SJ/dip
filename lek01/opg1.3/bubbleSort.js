@@ -35,3 +35,5 @@ function binarySearch(list, target) {
 
 console.log(binarySearch(list, 1));
 console.log(binarySearch(list, 17));
+
+module.exports = binarySearch;
