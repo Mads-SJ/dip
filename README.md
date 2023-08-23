@@ -1,1 +1,1 @@
-# Distributed Programming course
+# Distributed Programming
