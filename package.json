@@ -1,0 +1,17 @@
+{
+  "type": "module",
+  "dependencies": {
+    "chai": "^4.3.8",
+    "mocha": "^10.2.0"
+  },
+  "name": "dip",
+  "description": "",
+  "version": "1.0.0",
+  "main": "HelloWorld.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC"
+}
