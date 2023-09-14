@@ -6,7 +6,12 @@ const numberOfRollsSpan = document.getElementById("number-of-rolls");
 
 rollButton.addEventListener("click", roll);
 
-initialize();
+function onInitialization() {
+  dices.forEach((dice, i) => {
+      dice.addEventListener("animationend", () => dice.classList.remove("rolling")); 
+      dice.innerHTML = getEyeElements(i + 1);
+  });
+}
 
 function roll() {
     if (dices[0].classList.contains("rolling")) return;
@@ -18,14 +23,14 @@ function roll() {
     yatzy.throwDice([false, false, false, false, false]);
     const values = yatzy.getValues();
     dices.forEach((dice, i) => {
-    dice.innerHTML = getEyes(values[i]);
+    dice.innerHTML = getEyeElements(values[i]);
     dice.classList.add("rolling");
     });
 
     numberOfRollsSpan.innerText = yatzy.getThrowCount();
 }
 
-function getEyes(numberOfEyes) {
+function getEyeElements(numberOfEyes) {
   let face;
   let dot = `<span class="dot"></span>`;
 
@@ -93,9 +98,4 @@ function getEyes(numberOfEyes) {
   return face;
 }
 
-function initialize() {
-    dices.forEach((dice, i) => {
-        dice.addEventListener("animationend", () => dice.classList.remove("rolling")); 
-        dice.innerHTML = getEyes(i + 1);
-    });
-}
+onInitialization();
