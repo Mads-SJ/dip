@@ -101,7 +101,7 @@ function nOfAKindPoints(n) {
 
     for (let i = 1; i < counts.length; i++) {
         if (counts[i] >= n) {
-            points =  i * n;
+            points = i * n;
         }
     }
     return points;
@@ -111,11 +111,11 @@ function fullHousePoints() {
     const counts = calcCounts();
     let indexOfHighestDouble = 0;
     let indexOfHighestTriple = 0;
-    
+
     for (let i = 1; i < counts.length; i++) {
         if (counts[i] === 2 && i > indexOfHighestDouble) {
             indexOfHighestDouble = i;
-        } 
+        }
         if (counts[i] === 3 && i > indexOfHighestTriple) {
             indexOfHighestTriple = i;
         }
