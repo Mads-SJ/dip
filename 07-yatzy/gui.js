@@ -1,35 +1,33 @@
 import * as yatzy from "./yatzy.js";
 
-let points = 0;
-
 const dices = document.querySelectorAll(".dice");
 const rollButton = document.getElementById("roll-button");
 const numberOfRollsSpan = document.getElementById("number-of-rolls");
-const inputs = document.querySelectorAll("input");
-const sumValue = document.getElementById("sum-value");
-const bonusValue = document.getElementById("bonus-value");
-const totalValue = document.getElementById("total-value");
+const pointInputs = document.querySelectorAll("input:not([id])");
+const sumInput = document.getElementById("sum-value");
+const bonusInput = document.getElementById("bonus-value");
+const totalInput = document.getElementById("total-value");
 
-rollButton.addEventListener("click", roll);
-
-function onInitialization() {
+function initialize() {
 	dices.forEach((dice, i) => {
 		dice.addEventListener("animationend", () => dice.classList.remove("rolling"));
 		dice.innerHTML = getEyeElements(i + 1);
 	});
 
-	for (let i = 0; i < 15; i++) {
-		inputs[i].addEventListener("click", handlePointSelection);
-	}
+	rollButton.addEventListener("click", roll);
+
+	pointInputs.forEach(input => {
+		input.addEventListener("click", handlePointSelection);
+		input.value = "0";
+	});
 }
 
 function roll() {
-	if (dices[0].classList.contains("rolling")) return;
-	if (yatzy.getThrowCount() === 2) {
-		rollButton.disabled = true;
-	}
-
 	yatzy.throwDice([false, false, false, false, false]); // TODO: read holds from dice
+	updateAfterRoll();
+}
+
+function updateAfterRoll() {
 	const values = yatzy.getValues();
 	dices.forEach((dice, i) => {
 		dice.innerHTML = getEyeElements(values[i]);
@@ -37,23 +35,35 @@ function roll() {
 	});
 
 	numberOfRollsSpan.innerText = yatzy.getThrowCount();
-	fillResults();
-}
 
-function fillResults() {
 	const results = yatzy.getResults();
-	for (let i = 0; i < 15; i++) {
-		inputs[i].value = results[i];
+	pointInputs.forEach((input, i) => input.value = results[i]);
+	
+	if (yatzy.getThrowCount() === 3) {
+		rollButton.disabled = true;
 	}
-	// TODO: fill rest of inputs
 }
 
 function handlePointSelection(event) {
-	const input = event.target;
-	input.disabled = true;
-	points += parseInt(input.value);
-	sumValue.value = points;
+	if (yatzy.getThrowCount() === 0) {
+		return;
+	}
 
+	const input = event.target;
+	input.classList.add("currently-selected");
+	if (Array.prototype.indexOf.call(pointInputs, input) < 6) { // Ones to Sixes
+		const sum = parseInt(sumInput.value) + parseInt(input.value);
+		sumInput.value = sum;
+
+		if (sum >= 63 && bonusInput.value === "") {
+			bonusInput.value = 50;
+			totalInput.value = parseInt(totalInput.value) + 50;
+		}
+	}
+	totalInput.value = parseInt(totalInput.value) + parseInt(input.value);
+	
+	
+	// input.disabled = true; do this at a later point
 }
 
 function getEyeElements(numberOfEyes) {
@@ -124,4 +134,4 @@ function getEyeElements(numberOfEyes) {
 	return face;
 }
 
-onInitialization();
+initialize();
