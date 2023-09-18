@@ -76,7 +76,9 @@ justify-content: space-between;
 justify-content: center;
 }
 
-
+.hold {
+    border: 2px solid #0095ff;
+}
 
 @keyframes fancyRoll {
 100% {
