@@ -68,7 +68,16 @@ function handlePointSelection(event) {
 
 	const input = event.target;
 	updateTotals(input);
-	resetForNextTurn();
+	console.log(input);
+	if (isGameOver()) {
+		const message = "Game over! Your score is " + totalInput.value + " points. \n Do you want to play again?";
+		const playAgain = setTimeout(() => confirm(message), 10);
+		if (playAgain) {
+			location.reload();
+		}
+	} else {
+		resetForNextTurn();
+	}
 }
 
 function updateTotals(input) {
@@ -77,7 +86,6 @@ function updateTotals(input) {
 		const sum = parseInt(sumInput.value) + parseInt(input.value);
 		sumInput.value = sum;
 
-		console.log(sum);
 		if (sum >= 63 && bonusInput.value === "0") {
 			bonusInput.value = 50;
 			totalInput.value = parseInt(totalInput.value) + 50;
@@ -106,6 +114,15 @@ function getHolds() {
 		holds.push(dice.classList.contains("hold"));
 	});
 	return holds;
+}
+
+function isGameOver() {
+	for (let i = 0; i < pointInputs.length; i++) {
+		if (pointInputs[i].disabled === false) {
+			return false;
+		}
+	}
+	return true;
 }
 
 initialize();
