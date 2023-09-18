@@ -1,5 +1,5 @@
 import * as yatzy from "./yatzy.js";
-import { getEyeElements } from "./dice-gui.js";
+import { getEyeElements } from "./getEyeElements.js";
 
 const dices = document.querySelectorAll(".dice");
 const rollButton = document.getElementById("roll-button");
@@ -24,6 +24,7 @@ function initialize() {
 
 	pointInputs.forEach(input => {
 		input.addEventListener("click", handlePointSelection);
+		input.readOnly = true;
 		input.value = "0";
 	});
 }
@@ -31,10 +32,11 @@ function initialize() {
 function roll() {
 	const holds = getHolds();
 	yatzy.throwDice(holds);
-	updateAfterRoll();
+	updateDices();
+	updateResults();
 }
 
-function updateAfterRoll() {
+function updateDices() {
 	const values = yatzy.getValues();
 	dices.forEach((dice, i) => {
 		if (!dice.classList.contains("hold")) {
@@ -43,18 +45,20 @@ function updateAfterRoll() {
 		}
 	});
 
-	numberOfRollsSpan.innerText = yatzy.getThrowCount();
+	const throwCount = yatzy.getThrowCount();
+	numberOfRollsSpan.innerText = throwCount;
+	if (throwCount === 3) {
+		rollButton.disabled = true;
+	}
+}
 
+function updateResults() {
 	const results = yatzy.getResults();
 	pointInputs.forEach((input, i) => {
 		if (input.disabled === false) {
 			input.value = results[i];
 		}
 	});
-
-	if (yatzy.getThrowCount() === 3) {
-		rollButton.disabled = true;
-	}
 }
 
 function handlePointSelection(event) {
@@ -63,31 +67,37 @@ function handlePointSelection(event) {
 	}
 
 	const input = event.target;
-	input.disabled = true;
 	updateTotals(input);
+	resetForNextTurn();
+}
+
+function updateTotals(input) {
+	input.disabled = true;
+	if (Array.prototype.indexOf.call(pointInputs, input) < 6) { // Ones to Sixes
+		const sum = parseInt(sumInput.value) + parseInt(input.value);
+		sumInput.value = sum;
+
+		console.log(sum);
+		if (sum >= 63 && bonusInput.value === "0") {
+			bonusInput.value = 50;
+			totalInput.value = parseInt(totalInput.value) + 50;
+		}
+	}
+	totalInput.value = parseInt(totalInput.value) + parseInt(input.value);
+}
+
+function resetForNextTurn() {
+	dices.forEach(dice => dice.classList.remove("hold"));
+
+	yatzy.resetThrowCount();
+	numberOfRollsSpan.innerText = yatzy.getThrowCount();
+	rollButton.disabled = false;
 
 	pointInputs.forEach(input => {
 		if (input.disabled === false) {
 			input.value = "0";
 		}
 	});
-	yatzy.resetThrowCount();
-	numberOfRollsSpan.innerText = yatzy.getThrowCount();
-	rollButton.disabled = false;
-	dices.forEach(dice => dice.classList.remove("hold"));
-}
-
-function updateTotals(input) {
-	if (Array.prototype.indexOf.call(pointInputs, input) < 6) { // Ones to Sixes
-		const sum = parseInt(sumInput.value) + parseInt(input.value);
-		sumInput.value = sum;
-
-		if (sum >= 63 && bonusInput.value === "") {
-			bonusInput.value = 50;
-			totalInput.value = parseInt(totalInput.value) + 50;
-		}
-	}
-	totalInput.value = parseInt(totalInput.value) + parseInt(input.value);
 }
 
 function getHolds() {

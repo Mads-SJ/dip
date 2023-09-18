@@ -79,6 +79,7 @@ background-color: #0064bd;
     width: 100%;
     max-width: 60px;
     text-align: center;
+    cursor: pointer;
 }
 
 #sum-label {

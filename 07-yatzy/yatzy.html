@@ -1,68 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="yatzy.css">
-    <link rel="stylesheet" href="dice.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="yatzy.css" />
+    <link rel="stylesheet" href="dice.css" />
     <script type="module" src="gui.js" defer></script>
     <title>Yatzy</title>
-</head>
-<body>
+  </head>
+  <body>
     <main>
-        <div class="card">
-            <div id="dice-container">
-                <div class="dice"></div>
-                <div class="dice"></div>
-                <div class="dice"></div>
-                <div class="dice"></div>
-                <div class="dice"></div>
-            </div>
-            <button type="button" id="roll-button">Roll</button>
-            <p>Rolls: <span id="number-of-rolls">0</span></p>
+      <div class="card">
+        <div id="dice-container">
+          <div class="dice"></div>
+          <div class="dice"></div>
+          <div class="dice"></div>
+          <div class="dice"></div>
+          <div class="dice"></div>
         </div>
-        <div class="card" id="points-container">
-            <p>1-s</p>
-            <p>2-s</p>
-            <p>3-s</p>
-            <p>4-s</p>
-            <p>5-s</p>
-            <p>6-s</p>
-            <p>One pair</p>
-            <p>Two pairs</p>
-            <p>Three same</p>
-            <p>Four same</p>
-            <p>Full house</p>
-            <p>Small straight</p>
-            <p>Large straight</p>
-            <p>Chance</p>
-            <p>Yatzy</p>
+        <button type="button" id="roll-button">Roll</button>
+        <p>Rolls: <span id="number-of-rolls">0</span></p>
+      </div>
+      <div class="card" id="points-container">
+        <p>1-s</p>
+        <p>2-s</p>
+        <p>3-s</p>
+        <p>4-s</p>
+        <p>5-s</p>
+        <p>6-s</p>
+        <p>One pair</p>
+        <p>Two pairs</p>
+        <p>Three same</p>
+        <p>Four same</p>
+        <p>Full house</p>
+        <p>Small straight</p>
+        <p>Large straight</p>
+        <p>Chance</p>
+        <p>Yatzy</p>
 
-            <input type="text" readonly>
-            <input type="text" readonly>
-            <input type="text" readonly>
-            <input type="text" readonly>
-            <input type="text" readonly>
-            <input type="text" readonly>
-            <input type="text" readonly>
-            <input type="text" readonly>
-            <input type="text" readonly>
-            <input type="text" readonly>
-            <input type="text" readonly>
-            <input type="text" readonly>
-            <input type="text" readonly>
-            <input type="text" readonly>
-            <input type="text" readonly>
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
 
-            <p id="sum-label">Sum:</p>
-            <input type="text" id="sum-value" value="0" readonly>
-            <p id="bonus-label">Bonus:</p>
-            <input type="text" id="bonus-value" value="0" readonly>
-            <p id="total-label">Total:</p>
-            <input type="text" id="total-value" value="0" readonly>
-
-        </div>
+        <p id="sum-label">Sum:</p>
+        <input type="text" id="sum-value" value="0" readonly />
+        <p id="bonus-label">Bonus:</p>
+        <input type="text" id="bonus-value" value="0" readonly />
+        <p id="total-label">Total:</p>
+        <input type="text" id="total-value" value="0" readonly />
+      </div>
     </main>
-</body>
+  </body>
 </html>
