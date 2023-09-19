@@ -38,12 +38,13 @@ function roll() {
 
 function updateDices() {
 	const values = yatzy.getValues();
-	dices.forEach((dice, i) => {
+	for (let i = 0; i < dices.length; i++) {
+		const dice = dices[i];
 		if (!dice.classList.contains("hold")) {
 			dice.innerHTML = getEyeElements(values[i]);
 			dice.classList.add("rolling");
 		}
-	});
+	}
 
 	const throwCount = yatzy.getThrowCount();
 	numberOfRollsSpan.innerText = throwCount;
@@ -54,44 +55,40 @@ function updateDices() {
 
 function updateResults() {
 	const results = yatzy.getResults();
-	pointInputs.forEach((input, i) => {
+	for (let i = 0; i < pointInputs.length; i++) {
+		const input = pointInputs[i];
 		if (input.disabled === false) {
 			input.value = results[i];
 		}
-	});
+	}
 }
 
 function handlePointSelection(event) {
-	if (yatzy.getThrowCount() === 0) {
-		return;
-	}
+	if (yatzy.getThrowCount() === 0) { return; }
 
 	const input = event.target;
+	input.disabled = true;
 	updateTotals(input);
-	console.log(input);
+	resetForNextTurn();
 	if (isGameOver()) {
-		const message = "Game over! Your score is " + totalInput.value + " points. \n Do you want to play again?";
-		const playAgain = setTimeout(() => confirm(message), 10);
-		if (playAgain) {
-			location.reload();
-		}
-	} else {
-		resetForNextTurn();
+		handleGameOver();
 	}
 }
 
 function updateTotals(input) {
-	input.disabled = true;
-	if (Array.prototype.indexOf.call(pointInputs, input) < 6) { // Ones to Sixes
-		const sum = parseInt(sumInput.value) + parseInt(input.value);
-		sumInput.value = sum;
+	const value = parseInt(input.value);
+	if (indexOf(pointInputs, input) < 6) {
+		const oldSum = parseInt(sumInput.value);
+		const newSum = oldSum + value;
+		sumInput.value = newSum;
 
-		if (sum >= 63 && bonusInput.value === "0") {
+		if (newSum >= 63 && bonusInput.value === "0") {
 			bonusInput.value = 50;
-			totalInput.value = parseInt(totalInput.value) + 50;
+			value += 50;
 		}
 	}
-	totalInput.value = parseInt(totalInput.value) + parseInt(input.value);
+	const oldTotal = parseInt(totalInput.value);
+	totalInput.value = oldTotal + value;
 }
 
 function resetForNextTurn() {
@@ -106,6 +103,36 @@ function resetForNextTurn() {
 			input.value = "0";
 		}
 	});
+}
+
+function handleGameOver() {
+	const jsConfetti = new JSConfetti();
+	jsConfetti.addConfetti({
+		confettiNumber: 500,
+	});
+	rollButton.removeEventListener("click", roll);
+	rollButton.innerText = "New game";
+	rollButton.disabled = false;
+	rollButton.addEventListener("click", resetForNewGame);
+}
+
+function resetForNewGame() {
+	dices.forEach(dice => dice.classList.remove("hold"));
+	yatzy.resetThrowCount();
+	numberOfRollsSpan.innerText = yatzy.getThrowCount();
+
+	pointInputs.forEach(input => {
+		input.disabled = false;
+		input.value = "0";
+	});
+	sumInput.value = "0";
+	bonusInput.value = "0";
+	totalInput.value = "0";
+
+	rollButton.innerText = "Roll";
+	rollButton.removeEventListener("click", resetForNewGame);
+	rollButton.addEventListener("click", roll);
+	roll();
 }
 
 function getHolds() {
@@ -123,6 +150,15 @@ function isGameOver() {
 		}
 	}
 	return true;
+}
+
+function indexOf(list, element) {
+    for (let i = 0; i < list.length; i++) {
+        if (list[i] == element) {
+            return i;
+        }
+    }
+    return -1;
 }
 
 initialize();
