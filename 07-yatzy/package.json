@@ -5,7 +5,7 @@
   "description": "",
   "main": "web/gui.js",
   "scripts": {
-    "test": "mocha test"
+    "test": "mocha src/test"
   },
   "author": "",
   "license": "ISC",
