@@ -167,7 +167,7 @@ main {
     text-align: center;
 }
 
-input:not([id]) {
+.point-input {
     cursor: pointer;
 }
 

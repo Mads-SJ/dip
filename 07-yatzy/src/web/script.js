@@ -3,13 +3,14 @@ import * as yatzy from "../model/yatzy.js";
 const dices = document.querySelectorAll(".dice");
 const rollButton = document.getElementById("roll-button");
 const numberOfRollsSpan = document.getElementById("number-of-rolls");
-const pointInputs = document.querySelectorAll("input:not([id])");
+const pointInputs = document.querySelectorAll(".point-input");
 const sumInput = document.getElementById("sum-value");
 const bonusInput = document.getElementById("bonus-value");
 const totalInput = document.getElementById("total-value");
 
 function initialize() {
-	dices.forEach((dice, i) => {
+	for (let i = 0; i < dices.length; i++) {
+		const dice = dices[i];
 		dice.addEventListener("animationend", () => dice.classList.remove("rolling"));
 		dice.addEventListener("click", () => {
 			if (yatzy.getThrowCount() !== 0) {
@@ -17,7 +18,7 @@ function initialize() {
 			}
 		});
 		dice.innerHTML = getEyeElements(i + 1);
-	});
+	}
 
 	rollButton.addEventListener("click", roll);
 
@@ -32,6 +33,7 @@ function roll() {
 	const holds = getHolds();
 	yatzy.throwDice(holds);
 	updateDices();
+	updateThrowCount();
 	updateResults();
 }
 
@@ -44,7 +46,9 @@ function updateDices() {
 			dice.classList.add("rolling");
 		}
 	}
+}
 
+function updateThrowCount() {
 	const throwCount = yatzy.getThrowCount();
 	numberOfRollsSpan.innerText = throwCount;
 	if (throwCount === 3) {
@@ -94,7 +98,7 @@ function resetForNextTurn() {
 	dices.forEach(dice => dice.classList.remove("hold"));
 
 	yatzy.resetThrowCount();
-	numberOfRollsSpan.innerText = yatzy.getThrowCount();
+	updateThrowCount();
 	rollButton.disabled = false;
 
 	pointInputs.forEach(input => {
@@ -118,7 +122,7 @@ function handleGameOver() {
 function resetForNewGame() {
 	dices.forEach(dice => dice.classList.remove("hold"));
 	yatzy.resetThrowCount();
-	numberOfRollsSpan.innerText = yatzy.getThrowCount();
+	updateThrowCount();
 
 	pointInputs.forEach(input => {
 		input.disabled = false;
@@ -135,11 +139,8 @@ function resetForNewGame() {
 }
 
 function getHolds() {
-	const holds = [];
-	dices.forEach(dice => {
-		holds.push(dice.classList.contains("hold"));
-	});
-	return holds;
+	const dicesArray = Array.from(dices);
+	return dicesArray.map(dice => dice.classList.contains("hold"));
 }
 
 function isGameOver() {
