@@ -1,4 +1,4 @@
-const values = [];
+let values = [];
 let throwCount = 0;
 
 export function getValues() {
@@ -44,7 +44,7 @@ export function getResults() {
     return results;
 }
 
-function calcCounts() {
+export function calcCounts() {
     const counts = [0, 0, 0, 0, 0, 0, 0];
     for (let value of values) {
         counts[value] = counts[value] + 1;
@@ -52,12 +52,12 @@ function calcCounts() {
     return counts;
 }
 
-function sameValuePoints(value) {
+export function sameValuePoints(value) {
     const counts = calcCounts();
     return counts[value] * value;
 }
 
-function onePairPoints() {
+export function onePairPoints() {
     const pairIndices = getPairIndices();
     const size = pairIndices.length;
     if (size < 1) {
@@ -66,7 +66,7 @@ function onePairPoints() {
     return pairIndices[size - 1] * 2;
 }
 
-function twoPairPoints() {
+export function twoPairPoints() {
     const pairIndices = getPairIndices();
     const size = pairIndices.length;
     if (size < 2) { return 0; }
@@ -74,7 +74,7 @@ function twoPairPoints() {
     return pairIndices[size - 1] * 2 + pairIndices[size - 2] * 2;
 }
 
-function getPairIndices() {
+export function getPairIndices() {
     const counts = calcCounts();
     const pairIndices = [];
 
@@ -87,15 +87,15 @@ function getPairIndices() {
     return pairIndices;
 }
 
-function threeSamePoints() {
+export function threeSamePoints() {
     return nOfAKindPoints(3);
 }
 
-function fourSamePoints() {
+export function fourSamePoints() {
     return nOfAKindPoints(4);
 }
 
-function nOfAKindPoints(n) {
+export function nOfAKindPoints(n) {
     let points = 0;
     const counts = calcCounts();
 
@@ -107,7 +107,7 @@ function nOfAKindPoints(n) {
     return points;
 }
 
-function fullHousePoints() {
+export function fullHousePoints() {
     const counts = calcCounts();
     let indexOfHighestDouble = 0;
     let indexOfHighestTriple = 0;
@@ -129,18 +129,18 @@ function fullHousePoints() {
     return points;
 }
 
-function smallStraightPoints() {
+export function smallStraightPoints() {
     if (!isStraightInInterval(1, 5)) { return 0; }
     return 15;
 }
 
-function largeStraightPoints() {
+export function largeStraightPoints() {
     if (!isStraightInInterval(2, 6)) { return 0; }
     return 20;
 }
 
 // Returns true if there is a straight in the given interval, or else false.
-function isStraightInInterval(start, end) {
+export function isStraightInInterval(start, end) {
     const counts = calcCounts();
     let straight = true;
 
@@ -155,11 +155,11 @@ function isStraightInInterval(start, end) {
     return straight;
 }
 
-function chancePoints() {
+export function chancePoints() {
     return values.reduce((previous, current) => previous + current, 0);
 }
 
-function yatzyPoints() {
+export function yatzyPoints() {
     const counts = calcCounts();
     let points = 0;
     let yatzy = false;

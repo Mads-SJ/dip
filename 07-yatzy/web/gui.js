@@ -1,4 +1,4 @@
-import * as yatzy from "./yatzy.js";
+import * as yatzy from "../model/yatzy.js";
 import { getEyeElements } from "./getEyeElements.js";
 
 const dices = document.querySelectorAll(".dice");
