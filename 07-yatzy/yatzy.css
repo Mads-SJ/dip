@@ -79,6 +79,9 @@ background-color: #0064bd;
     width: 100%;
     max-width: 60px;
     text-align: center;
+}
+
+input:not([id]) {
     cursor: pointer;
 }
 

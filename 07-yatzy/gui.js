@@ -76,7 +76,7 @@ function handlePointSelection(event) {
 }
 
 function updateTotals(input) {
-	const value = parseInt(input.value);
+	let value = parseInt(input.value);
 	if (indexOf(pointInputs, input) < 6) {
 		const oldSum = parseInt(sumInput.value);
 		const newSum = oldSum + value;
