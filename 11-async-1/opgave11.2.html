@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Opgave 11.2</title>
+    <script src="opgave11.2.js" defer></script>
+  </head>
+  <body>
+    <table border="1" id="userTable">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>City</th>
+        </tr>
+      </thead>
+      <tbody id="userTableBody">
+        <!-- Table rows will be inserted here using JavaScript -->
+      </tbody>
+    </table>
+    <div id="post-container"></div>
+  </body>
+
+  <style>
+    /* Style for the table */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    /* Style for alternate rows */
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Hover effect */
+    tr:hover {
+      background-color: #ddd;
+    }
+
+    #post-container {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .post-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: 20px;
+      max-width: 370px;
+    }
+
+    .post-title {
+      font-size: 24px;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    .post-body {
+      font-size: 16px;
+      color: #666;
+      margin-top: 10px;
+    }
+  </style>
+</html>
