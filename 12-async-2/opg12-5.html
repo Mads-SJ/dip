@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Quote Generator</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        text-align: center;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        align-items: center;
+      }
+      .quote-container {
+        margin: 20px;
+        padding: 20px;
+        width: 30%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        margin-right: 20px;
+      }
+      .quote-text {
+        font-size: 18px;
+      }
+      .quote-author {
+        font-style: italic;
+        margin-top: 10px;
+      }
+      #new-quotes-button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="quote-container" id="quote1">
+      <p class="quote-text">Quote 1 text.</p>
+      <p class="quote-author">- Author 1</p>
+    </div>
+    <div class="quote-container" id="quote2">
+      <p class="quote-text">Quote 2 text.</p>
+      <p class="quote-author">- Author 2</p>
+    </div>
+    <div class="quote-container" id="quote3">
+      <p class="quote-text">Quote 3 text.</p>
+      <p class="quote-author">- Author 3</p>
+    </div>
+
+    <button id="new-quotes-button">New Quotes</button>
+
+    <script>
+      const quotes = [
+        { text: "Quote 1 text updated.", author: "Author 1" },
+        { text: "Quote 2 text updated.", author: "Author 2" },
+        { text: "Quote 3 text updated.", author: "Author 3" },
+        // Add more quotes here
+      ];
+
+      async function getRandomQuotes() {
+        const url = "https://www.tronalddump.io/random/quote";
+        return await Promise.all([fetch(url), fetch(url), fetch(url)]);
+      }
+
+      async function updateQuotes() {
+        const quoteContainers = document.querySelectorAll(".quote-container");
+        const randomQuotes = await getRandomQuotes();
+        console.log(randomQuotes);
+        quoteContainers.forEach((container, index) => {
+          container.querySelector(".quote-text").textContent =
+            randomQuotes[index].text();
+          container.querySelector(
+            ".quote-author"
+          ).textContent = `- ${randomQuote.author}`;
+        });
+      }
+
+      document
+        .getElementById("new-quotes-button")
+        .addEventListener("click", updateQuotes);
+    </script>
+  </body>
+</html>
