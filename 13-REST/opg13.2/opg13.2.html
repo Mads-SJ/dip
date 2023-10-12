@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="opg13.2.css" />
+    <script src="opg13.2.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Chatroom</h1>
+    </header>
+
+    <main>
+      <section id="chatrooms">
+        <h2>Choose Chatroom:</h2>
+        <select id="chatroom-select">
+          <option value="default">All</option>
+          <option value="chatroom1">Chatroom 1</option>
+          <option value="chatroom2">Chatroom 2</option>
+          <!-- Add more chatroom options here -->
+        </select>
+      </section>
+      <section id="messages">
+        <h2>Messages:</h2>
+        <div id="messages-container"></div>
+
+        <div id="send-message-container">
+          <input
+            type="text"
+            id="message-input"
+            placeholder="Type your message"
+          />
+          <button id="send-message-button">Send</button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
