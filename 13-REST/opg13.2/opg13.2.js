@@ -1,4 +1,5 @@
-const apiUrl = "https://beskedserver.azurewebsites.net/api";
+// const apiUrl = "https://beskedserver.azurewebsites.net/api";
+const apiUrl = "http://localhost:8080";
 const chatroomSelect = document.getElementById("chatroom-select");
 const messageInput = document.getElementById("message-input");
 const sendButton = document.getElementById("send-message-button");
