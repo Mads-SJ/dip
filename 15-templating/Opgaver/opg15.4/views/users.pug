@@ -1,0 +1,20 @@
+html
+  head
+    title Brugeroplysninger
+  body
+    h1 Brugeroplysninger
+    h2 tabel
+    table
+      tr
+        th Gender
+        th Email
+        th Phone
+        th Cell
+        th Nationality
+      each user in users
+        tr
+          td #{user.gender}
+          td #{user.email}
+          td #{user.phone}
+          td #{user.cell}
+          td #{user.nat}

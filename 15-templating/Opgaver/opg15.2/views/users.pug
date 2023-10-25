@@ -1,0 +1,11 @@
+html
+  head
+    title Brugeroplysninger
+  body
+    h1 Brugeroplysninger
+    ul
+      each user in users
+          li Brugernavn: #{user.username}
+          li Fulde navn: #{user.fullName}
+          li Email: #{user.email}
+          li ------------------------
