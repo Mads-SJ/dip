@@ -1,0 +1,52 @@
+body  
+    h1 Shop
+    h2 Products
+    table
+        tr
+            th Name
+            th Price
+        each product in products
+            tr
+                td #{product.name}
+                td #{product.price}
+                td 
+                     button(onclick='clickfunction("' + product.id + '")') Buy
+    h2 Cart
+    if cart && cart.length > 0
+        list
+            each product in cart
+                li #{product.name} - #{product.price} kr.
+    else 
+        p No products in cart
+    
+
+
+script. 
+    async function post(url, objekt) {
+        const respons = await fetch(url, {
+            method: "POST",
+            body: JSON.stringify(objekt),
+            headers: {
+            'Content-Type': 'application/json'
+            }
+        });
+    }
+    let clickfunction = async (id) => {
+        try {
+            await post("/buy", {id: id});
+            location.reload();
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+style.
+    table {
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        padding: 10px;
+    }
