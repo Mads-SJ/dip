@@ -1,0 +1,19 @@
+Higher order functions can take function as arguments or return a function as a result
+Bruges meget i functional programming.
+Kan bruges til at abstrahere funktionalitet væk, som brugeren af function kan tilføje senere.
+Det er fx nyttigt at arbejde med arrays i Javascript.
+Det kan gøre koden lettere at læse.
+
+Eksempel på returnering af funktion
+
+function multiplier(factor) {
+  return x => {
+    return x * factor;
+  };
+}
+
+const double = multiplier(2);
+const triple = multiplier(3);
+
+console.log(double(5)); // 10
+console.log(triple(5)); // 15
