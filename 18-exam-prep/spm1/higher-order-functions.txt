@@ -7,9 +7,7 @@ Det kan gøre koden lettere at læse.
 Eksempel på returnering af funktion
 
 function multiplier(factor) {
-  return x => {
-    return x * factor;
-  };
+  return x => x * factor;
 }
 
 const double = multiplier(2);
