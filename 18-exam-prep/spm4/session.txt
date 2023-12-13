@@ -1,0 +1,9 @@
+express-session er et standard express middleware
+Understøtter identifikation af en bruger/klient
+Session data gemmes på serveren
+Kun session ID gemmes på klienten (i en cookie)
+Default er MemoryStorage som er designet til udvikling og test. (Session data glemmes når serveren lukker)
+Man kan bruge session stores f.eks. MongoDB, så session data bliver gemt i en database
+
+Når en klient første gang tilgår serveren bliver der oprettet en ny session
+Data i denne session gemmes selvom browseren bliver lukket eller pc slukket fordi session er gemt i cookie
