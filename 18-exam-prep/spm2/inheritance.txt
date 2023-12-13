@@ -1,0 +1,9 @@
+Arv i Javascript er baseret på prototyper.
+Alle objekter har en prototype som kan tilgås via .__proto__
+Prototyper er også objekter.
+Prototyper kan selv have en prototype og danner hermed et prototype hierarki.
+Et object arver properties og metoder fra sine prototyper.
+Properties og metoder længst nede i hierarkiet bliver brugt først inden man kigger højere oppe.
+
+Kan overskrives f.eks.
+Person.prototype.toString = function () { return ... };

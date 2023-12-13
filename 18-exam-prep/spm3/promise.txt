@@ -1,0 +1,12 @@
+Asynkron programmering kan gøres på 3 måder i JS
+Callback, Promise, Async/Await
+Promises bruges i asynkron programmering til at gøre det mere struktureret og letlæseligt
+Det bruges til at repræsentere værdier, der muligvis er tilgængelige nu, senere eller aldrig
+En promise har tre tilstande der repræsenterer en asynkron operation
+- Pending, async operation er i gang og resultatet er ikke klar endnu
+- Fulfilled, async operation er afsluttet med succes
+- Rejected, async operation er afsluttet, men mislykket
+
+Promises benyttes f.eks. i js fetch metoden, hvor man skal bruge data fra tredjeparts api. 
+Her er der typisk en forsinkelse, hvor det pågældende promise vil være pending hvorefter
+den endten bliver fulfilled (man får sin data) eller rejected (der er sket en fejl eller timeout).
