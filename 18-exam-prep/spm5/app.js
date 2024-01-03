@@ -1,22 +1,33 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const session = require('express-session');
 
-app.set('view engine', 'pug');
-app.set('views', 'templates');
+const contacts = [
+    { id: 0, name: "Anders", phone: "12345678" },
+    { id: 1, name: "Birgitte", phone: "87654321" },
+];
 
-app.use(express.static('filer'));
+app.set("view engine", "pug");
+app.set("views", "templates");
+
+app.use(express.static("filer"));
 app.use(express.json());
-app.use(session({secret: 'hemmelig', saveUninitialized: true, resave: true}));
 
-app.get('/', function (request, response) {
-
+app.get("/", function (request, response) {
+    response.render("index", { contacts });
 });
 
-app.post('/', function (request, response) {
-
+app.patch("/", function (request, response) {
+    const { id, newPhoneNumber } = request.body;
+    console.log("patching");
+    const contact = contacts.find(contact => contact.id === Number(id));
+    if (contact) {
+        contact.phone = newPhoneNumber;
+    }
+    response.render("index", {
+        contacts,
+    });
 });
 
 app.listen(8080);
 
-console.log('Lytter på port 8080 ...');
+console.log("Lytter på port 8080 ...");
