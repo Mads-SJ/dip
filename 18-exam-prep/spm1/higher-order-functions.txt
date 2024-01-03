@@ -1,8 +1,9 @@
 Higher order functions can take function as arguments or return a function as a result
 Bruges meget i functional programming.
 Kan bruges til at abstrahere funktionalitet væk, som brugeren af function kan tilføje senere.
-Det er fx nyttigt at arbejde med arrays i Javascript.
+Det er fx nyttigt når man arbejder med arrays i Javascript.
 Det kan gøre koden lettere at læse.
+De fleste hof'er returnerer et array, så det er muligt at benytte CHAINING
 
 Eksempel på returnering af funktion
 
