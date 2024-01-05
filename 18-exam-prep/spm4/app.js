@@ -19,9 +19,8 @@ app.post("/", function (request, response) {
     let personer = request.session.personer || [];
     personer.push(person);
     request.session.personer = personer;
-    response.status(201).render("index", {
-        personer,
-    });
+
+    response.status(201).send();
 });
 
 app.listen(8080);

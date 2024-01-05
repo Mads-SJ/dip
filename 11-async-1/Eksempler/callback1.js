@@ -19,15 +19,19 @@ function simpelLangvarig(nr, callback) {
 
 try {
     langvarig(1, slut);
-    console.log('Efter kald af langvarig()');
-}
-catch (e) {
-    console.log('Exception: ' + e);
+    console.log("Efter kald af langvarig()");
+} catch (e) {
+    console.log("Exception: " + e);
 }
 
 function slut(fejl, resultat) {
-    if (fejl)
-        console.log('Fejl: ' + fejl);
-    else
-        console.log('Resultat: ' + resultat);
+    if (fejl) console.log("Fejl: " + fejl);
+    else console.log("Resultat: " + resultat);
 }
+
+function slowFunction(callback) {
+    const data = "data";
+    setTimeout(callback(data), 5000);
+}
+
+slowFunction(data => console.log(data));

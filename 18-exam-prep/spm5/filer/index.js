@@ -23,16 +23,16 @@ const updateButtons = document.querySelectorAll("button");
 console.log(input, updateButtons);
 updateButtons.forEach(updateBtn => {
     updateBtn.addEventListener("click", async () => {
-        const id = updateBtn.id;
+        const id = Number(updateBtn.id);
         const newPhoneNumber = input.value;
         try {
             await fetch("http://localhost:8080", {
                 method: "PATCH",
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     id,
                     newPhoneNumber,
                 }),
-                headers: { "Content-Type": "application/json" },
             });
             location.reload();
         } catch (error) {

@@ -19,7 +19,7 @@ app.get("/", function (request, response) {
 app.patch("/", function (request, response) {
     const { id, newPhoneNumber } = request.body;
     console.log("patching");
-    const contact = contacts.find(contact => contact.id === Number(id));
+    const contact = contacts.find(contact => contact.id === id);
     if (contact) {
         contact.phone = newPhoneNumber;
     }

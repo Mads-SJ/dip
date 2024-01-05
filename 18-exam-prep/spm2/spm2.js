@@ -1,6 +1,6 @@
 class Bil {
     static antalBiler = 0;
-    #bilmaerke;
+    #bilmaerke; // private property
     #pris;
 
     constructor(bilmaerke, pris) {
@@ -25,6 +25,7 @@ class Bil {
 }
 
 const bil = new Bil("Toyota", 1000);
+
 class Varevogn extends Bil {
     #lasteevne;
     constructor(bilmaerke, pris, lasteevne) {

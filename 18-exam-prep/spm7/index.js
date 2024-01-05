@@ -20,9 +20,6 @@ async function post(url, objekt) {
 
 const div = document.querySelector("#result");
 const button = document.querySelector("button");
-async function main() {
-    loadRandomQuotes();
-}
 
 function showQuote(value, tags) {
     div.innerHTML += `<p>${value}</p>`;
@@ -49,4 +46,4 @@ async function loadRandomQuotes() {
     }
 }
 
-main();
+loadRandomQuotes();
